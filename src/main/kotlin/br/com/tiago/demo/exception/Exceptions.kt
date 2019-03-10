@@ -1,5 +1,5 @@
 package br.com.tiago.demo.exception
 
-class CardNotFoundException: Exception()
+class CreditCardNotFoundException: Exception()
 class ProductNotFoundException: Exception()
 class UserNotFoundException: Exception()
