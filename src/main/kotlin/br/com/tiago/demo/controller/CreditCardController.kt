@@ -9,18 +9,19 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
 class CreditCardController {
 
     @Autowired
     private lateinit var creditCardBusiness: CreditCardBusiness
 
-    @RequestMapping(value = "/card/{cardId}", method = [(RequestMethod.GET)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
+    @RequestMapping(value = "/cards/{cardId}", method = [(RequestMethod.GET)])
     fun getCard(@PathVariable(value = "cardId") cardId: Long): ResponseEntity<CreditCard> {
         val card = creditCardBusiness.getCard(cardId)
         return ResponseEntity(card, HttpStatus.OK)
     }
 
-    @RequestMapping(value = "/card", method = [(RequestMethod.POST)], consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
+    @RequestMapping(value = "/cards", method = [(RequestMethod.POST)])
     fun createCard(@RequestBody card: CreditCard): ResponseEntity<CreditCard> {
         val persistedCard = creditCardBusiness.createCard(card)
         return ResponseEntity(persistedCard, HttpStatus.OK)

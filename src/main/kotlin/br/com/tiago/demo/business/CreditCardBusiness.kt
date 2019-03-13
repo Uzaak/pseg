@@ -13,12 +13,15 @@ class CreditCardBusiness {
     @Autowired
     private lateinit var creditCardRepository: CreditCardRepository
 
+    //Autowired no construtor??
+
     fun getCard(cardId: Long): CreditCard {
         val entity = creditCardRepository.findById(cardId).orElseThrow { CreditCardNotFoundException() }
         return CreditCard(entity)
     }
 
     fun createCard(card: CreditCard): CreditCard {
+        //card.isValid()
         val entity = CreditCardEntity(card)
         val persistedCard = creditCardRepository.save(entity)
         return CreditCard(persistedCard)
