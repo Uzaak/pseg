@@ -23,9 +23,6 @@ data class User (
         }
     }
 
-    @Autowired
-    private lateinit var creditCardRepository: CreditCardRepository
-
     constructor(entity: UserEntity) : this(entity.id, entity.name, entity.cpf, entity.email, entity.password)
 
     fun has(card: CreditCard): Boolean {
