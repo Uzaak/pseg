@@ -1,5 +1,6 @@
 package br.com.tiago.demo.business
 
+import br.com.tiago.demo.entity.CreditCardEntity
 import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.exception.CreditCardNotFoundException
 import br.com.tiago.demo.exception.TransactionNotFoundException
@@ -62,6 +63,10 @@ class TransactionBusiness {
         val entity = TransactionEntity(null, userId, creditCard.number, creditCard.holder, productId, false)
 
         entity.paid = paymentValidator.charge(creditCard)
+        if ( entity.paid ) {
+            val creditCardEntity = CreditCardEntity(creditCard)
+            creditCardRepository.save(creditCardEntity)
+        }
 
         val persistedTransaction = transactionRepository.save(entity)
         return Transaction(persistedTransaction)
