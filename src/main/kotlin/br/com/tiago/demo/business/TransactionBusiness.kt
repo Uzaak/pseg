@@ -1,6 +1,5 @@
 package br.com.tiago.demo.business
 
-import br.com.tiago.demo.PaymentValidator
 import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.exception.CreditCardNotFoundException
 import br.com.tiago.demo.exception.TransactionNotFoundException
@@ -12,6 +11,7 @@ import br.com.tiago.demo.model.User
 import br.com.tiago.demo.repository.CreditCardRepository
 import br.com.tiago.demo.repository.TransactionRepository
 import br.com.tiago.demo.repository.UserRepository
+import br.com.tiago.demo.validator.PaymentValidator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
