@@ -17,3 +17,10 @@ create table product (
     price decimal(10,2)
 );
 
+create table user (
+    id primary key auto_increment,
+    name varchar(255),
+    cpf bigint,
+    email varchar(255),
+    password varchar(255)
+)
