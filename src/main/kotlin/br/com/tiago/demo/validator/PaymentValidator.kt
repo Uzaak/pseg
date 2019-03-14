@@ -1,4 +1,4 @@
-package br.com.tiago.demo
+package br.com.tiago.demo.validator
 
 import br.com.tiago.demo.model.CreditCard
 import org.springframework.stereotype.Component
