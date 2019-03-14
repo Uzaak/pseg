@@ -24,5 +24,6 @@ data class CreditCardEntity (
         var expiration: Date?
 
 ) {
+    constructor() : this(null, 0, null, "holder", null, null)
     constructor(card: CreditCard) : this(card.id, card.number, card.holderId, card.holder, card.cvv, card.expiration)
 }

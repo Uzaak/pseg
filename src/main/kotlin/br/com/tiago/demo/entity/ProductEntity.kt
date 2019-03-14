@@ -17,6 +17,7 @@ data class ProductEntity (
         var price: Double
 
 ) {
+    constructor() : this(null, "description", 0.0)
     constructor(product: Product) : this(product.id, product.description, product.price)
 }
 

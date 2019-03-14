@@ -21,5 +21,6 @@ data class UserEntity (
         var password: String
 
 ) {
+    constructor() : this(null, "name", 0, "email", "password")
     constructor(user: User) : this(user.id, user.name, user.cpf, user.email, user.password)
 }

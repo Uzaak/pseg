@@ -27,6 +27,7 @@ data class TransactionEntity (
         var paid: Boolean
 
 ) {
+    constructor() : this(null, 0, 0, "holder", 0, false)
     constructor(user: User, card: CreditCard, product: Product) : this(null, user.id!!, card.number, card.holder, product.id!!, false)
     constructor(transaction: Transaction) : this(transaction.id, transaction.user.id!!, transaction.creditCardNumber, transaction.creditCardHolder, transaction.product.id!!, transaction.paid)
 }
