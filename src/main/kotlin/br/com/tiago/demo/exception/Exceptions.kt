@@ -6,8 +6,7 @@ class UserNotFoundException: Exception()
 class TransactionNotFoundException: Exception()
 
 class InvalidUserException: Exception()
+class InvalidCreditCardException: Exception()
 class InvalidProductException: Exception()
 
 class UserCardMismatchException: Exception()
-
-fun String.encrypted() = "${this.length}"

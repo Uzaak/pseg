@@ -1,7 +1,9 @@
 package br.com.tiago.demo.business
 
+import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.entity.UserEntity
 import br.com.tiago.demo.exception.CreditCardNotFoundException
+import br.com.tiago.demo.exception.ProductNotFoundException
 import br.com.tiago.demo.exception.TransactionNotFoundException
 import br.com.tiago.demo.exception.UserNotFoundException
 import br.com.tiago.demo.model.CreditCard
@@ -9,6 +11,7 @@ import br.com.tiago.demo.model.Product
 import br.com.tiago.demo.model.Transaction
 import br.com.tiago.demo.model.User
 import br.com.tiago.demo.repository.CreditCardRepository
+import br.com.tiago.demo.repository.ProductRepository
 import br.com.tiago.demo.repository.TransactionRepository
 import br.com.tiago.demo.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,6 +25,9 @@ class UserBusiness {
 
     @Autowired
     private lateinit var creditCardRepository: CreditCardRepository
+
+    @Autowired
+    private lateinit var productRepository: ProductRepository
 
     @Autowired
     private lateinit var transactionRepository: TransactionRepository
@@ -44,7 +50,19 @@ class UserBusiness {
 
     fun getUserTransactions(userId: Long): List<Transaction> {
         val entityList = transactionRepository.findAllByUserId(userId).orElseThrow { TransactionNotFoundException() }
-        return entityList.map { Transaction(it) }
+        return entityList.map { transactionFrom(it) }
+    }
+
+    private fun transactionFrom(entity: TransactionEntity): Transaction {
+        var transaction = Transaction(entity)
+
+        val userEntity = userRepository.findById(entity.userId).orElseThrow { UserNotFoundException() }
+        transaction.user = User(userEntity)
+
+        val productEntity = productRepository.findById(entity.productId).orElseThrow { ProductNotFoundException() }
+        transaction.product = Product(productEntity)
+
+        return transaction
     }
 
 }

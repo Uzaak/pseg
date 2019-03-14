@@ -2,6 +2,7 @@ package br.com.tiago.demo.model
 
 import br.com.tiago.demo.entity.UserEntity
 import br.com.tiago.demo.exception.CreditCardNotFoundException
+import br.com.tiago.demo.exception.InvalidCreditCardException
 import br.com.tiago.demo.exception.InvalidUserException
 import br.com.tiago.demo.repository.CreditCardRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,20 +18,26 @@ data class User (
 
 ) {
     companion object {
-        @Autowired
-        private lateinit var creditCardRepository: CreditCardRepository
+        fun placeholder(): User {
+            return User(null, "name", 0, "email", "password")
+        }
     }
+
+    @Autowired
+    private lateinit var creditCardRepository: CreditCardRepository
 
     constructor(entity: UserEntity) : this(entity.id, entity.name, entity.cpf, entity.email, entity.password)
 
-    fun has(cardId: Long): Boolean {
+    fun has(card: CreditCard): Boolean {
 
         if ( id == null ) {
             throw InvalidUserException()
         }
 
-        val cardEntity = creditCardRepository.findById(cardId).orElseThrow { CreditCardNotFoundException() }
-        val card = CreditCard(cardEntity)
+        if ( card.id == null ) {
+            throw InvalidCreditCardException()
+        }
+
         return card.holderId == id
     }
 }

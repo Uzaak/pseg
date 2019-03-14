@@ -10,6 +10,12 @@ data class Product (
         var price: Double
 
 ) {
+    companion object {
+        fun placeholder(): Product {
+            return Product(null, "description", 0.0)
+        }
+    }
+
     constructor(entity: ProductEntity) : this(entity.id, entity.description, entity.price)
 }
 

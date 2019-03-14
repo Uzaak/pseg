@@ -42,12 +42,12 @@ class TransactionBusiness {
         val userEntity = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
         val user = User(userEntity)
 
-        if ( ! user.has(cardId) ) {
-            throw UserCardMismatchException()
-        }
-
         val cardEntity = creditCardRepository.findById(cardId).orElseThrow { CreditCardNotFoundException() }
         val card = CreditCard(cardEntity)
+
+        if ( ! user.has(card) ) {
+            throw UserCardMismatchException()
+        }
 
         val entity = TransactionEntity(null, userId, cardEntity.number, cardEntity.holder, productId, false)
 
