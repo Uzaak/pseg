@@ -11,3 +11,9 @@ create table credit_card (
     expiration date
 );
 
+create table product (
+    id primary key auto_increment,
+    description varchar(255),
+    price decimal(10,2)
+);
+
