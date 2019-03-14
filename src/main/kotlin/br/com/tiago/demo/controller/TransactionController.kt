@@ -38,8 +38,8 @@ class TransactionController {
 
         if ( data.creditCardId != null ) {
             transaction = transactionBusiness.makeTransaction(data.userId, data.creditCardId, data.productId)
-        } else if ( data.creditCardNumber!= null && data.creditCardHolder != null && data.creditCardCvv != null && data.creditCardExpiration != null ) {
-            val card = CreditCard(null, data.creditCardNumber, null, data.creditCardHolder, data.creditCardCvv, data.creditCardExpiration)
+        } else if ( data.creditCardNumber != null && data.creditCardHolder != null && data.creditCardCvv != null && data.creditCardExpiration != null ) {
+            val card = CreditCard(null, data.creditCardNumber!!, null, data.creditCardHolder!!, data.creditCardCvv, data.creditCardExpiration)
             transaction = transactionBusiness.makeTransaction(data.userId, card, data.productId)
         } else {
             return ResponseEntity<Transaction?>(null, HttpStatus.BAD_REQUEST)
