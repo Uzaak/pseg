@@ -17,8 +17,11 @@ data class Transaction (
         var id: Long?,
 
         var user: User,
-        var creditCard: CreditCard,
-        var product: Product
+        var creditCardNumber: Long,
+        var creditCardHolder: String,
+        var product: Product,
+
+        var paid: Boolean
 
 ) {
     companion object {
@@ -36,5 +39,5 @@ data class Transaction (
         private fun findProductById(id: Long): ProductEntity = productRepository.findById(id).orElseThrow { ProductNotFoundException() }
     }
 
-    constructor(entity: TransactionEntity) : this(entity.id, User(findUserById(entity.userId)), CreditCard(findCreditCardById(entity.creditCardId)), Product(findProductById(entity.productId)))
+    constructor(entity: TransactionEntity) : this(entity.id, User(findUserById(entity.userId)), entity.creditCardNumber, entity.creditCardHolder, Product(findProductById(entity.productId)), entity.paid)
 }

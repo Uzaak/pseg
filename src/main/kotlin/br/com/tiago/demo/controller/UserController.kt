@@ -9,18 +9,19 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
+@RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
 class UserController {
 
     @Autowired
     private lateinit var userBusiness: UserBusiness
 
-    @RequestMapping(value = "/users/{userId}", method = [(RequestMethod.GET)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
+    @RequestMapping(value = "/users/{userId}", method = [(RequestMethod.GET)])
     fun getUser(@PathVariable(value = "userId") userId: Long): ResponseEntity<User> {
         val user = userBusiness.getUser(userId)
         return ResponseEntity(user, HttpStatus.OK)
     }
 
-    @RequestMapping(value = "/users", method = [(RequestMethod.POST)], consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
+    @RequestMapping(value = "/users", method = [(RequestMethod.POST)])
     fun createUser(@RequestBody user: User): ResponseEntity<User> {
         val persistedUser = userBusiness.createUser(user)
         return ResponseEntity(persistedUser, HttpStatus.OK)

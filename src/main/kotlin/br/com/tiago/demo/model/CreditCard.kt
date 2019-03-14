@@ -7,12 +7,13 @@ data class CreditCard (
 
         var id: Long?,
 
-        var number: String,
-        var holderId: Long,
-        var cvv: Int,
-        var expiration: Date
+        var number: Long,
+        var holderId: Long?,
+        var holder: String,
+        var cvv: Int?,
+        var expiration: Date?
 
 ) {
-    constructor(entity: CreditCardEntity) : this(entity.id, entity.number, entity.holderId, entity.cvv, entity.expiration)
+    constructor(entity: CreditCardEntity) : this(entity.id, entity.number, entity.holderId, entity.holder, entity.cvv, entity.expiration)
 }
 
