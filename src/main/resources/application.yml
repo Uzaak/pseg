@@ -1,1 +1,39 @@
+info:
+  component: 'Pseg'
+  build:
+    version: "0.0.1"
+    name: "Pseg"
 
+server:
+  servlet:
+    context-path: /pseg
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  application:
+    name: pseg
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pseg
+    username: root
+    password: rootroot
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming_strategy: org.hibernate.cfg.DefaultNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://some.cool.production.url:3306/pseg
+    username: pseg_username
+    password: pseg_password
