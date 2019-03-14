@@ -8,8 +8,8 @@ data class TransactionBody (
 
         val creditCardId: Long?,
 
-        var creditCardNumber: Long,
-        var creditCardHolder: String,
+        var creditCardNumber: Long?,
+        var creditCardHolder: String?,
         var creditCardCvv: Int?,
         var creditCardExpiration: Date?,
 
