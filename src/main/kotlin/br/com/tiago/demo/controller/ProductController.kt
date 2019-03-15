@@ -24,7 +24,7 @@ class ProductController (
     @RequestMapping(value = ["/products"], method = [(RequestMethod.POST)])
     fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
         val persistedProduct = productBusiness.createProduct(product)
-        return ResponseEntity(persistedProduct, HttpStatus.OK)
+        return ResponseEntity(persistedProduct, HttpStatus.CREATED)
     }
 
     @RequestMapping(value = ["/products"], method = [(RequestMethod.PUT)])

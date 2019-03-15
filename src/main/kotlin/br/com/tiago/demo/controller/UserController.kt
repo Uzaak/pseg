@@ -24,7 +24,7 @@ class UserController (
     @RequestMapping(value = ["/users"], method = [(RequestMethod.POST)])
     fun createUser(@RequestBody user: User): ResponseEntity<User> {
         val persistedUser = userBusiness.createUser(user)
-        return ResponseEntity(persistedUser, HttpStatus.OK)
+        return ResponseEntity(persistedUser, HttpStatus.CREATED)
     }
 
     @RequestMapping(value = ["/users/{userId}/cards"], method = [(RequestMethod.GET)])

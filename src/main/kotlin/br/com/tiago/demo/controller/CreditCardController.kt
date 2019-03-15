@@ -23,7 +23,7 @@ class CreditCardController (
     @RequestMapping(value = ["/cards"], method = [(RequestMethod.POST)])
     fun createCard(@RequestBody card: CreditCard): ResponseEntity<CreditCard> {
         val persistedCard = creditCardBusiness.createCard(card)
-        return ResponseEntity(persistedCard, HttpStatus.OK)
+        return ResponseEntity(persistedCard, HttpStatus.CREATED)
     }
 
 }

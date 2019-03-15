@@ -45,7 +45,7 @@ class TransactionController (
             return ResponseEntity<Transaction?>(null, HttpStatus.BAD_REQUEST)
         }
 
-        return ResponseEntity(transaction, HttpStatus.OK)
+        return ResponseEntity(transaction, HttpStatus.CREATED)
     }
 
 }
