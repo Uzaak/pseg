@@ -3,7 +3,6 @@ package br.com.tiago.demo.entity
 import br.com.tiago.demo.extension.encrypted
 import br.com.tiago.demo.model.CreditCard
 import br.com.tiago.demo.model.Product
-import br.com.tiago.demo.model.Transaction
 import br.com.tiago.demo.model.User
 import javax.persistence.*
 

@@ -1,7 +1,6 @@
 package br.com.tiago.demo.entity
 
 import br.com.tiago.demo.extension.encrypted
-import br.com.tiago.demo.model.User
 import javax.persistence.*
 
 @Entity

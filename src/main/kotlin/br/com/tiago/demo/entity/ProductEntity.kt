@@ -1,6 +1,5 @@
 package br.com.tiago.demo.entity
 
-import br.com.tiago.demo.model.Product
 import javax.persistence.*
 
 @Entity
