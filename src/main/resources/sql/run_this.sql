@@ -28,7 +28,7 @@ create table `user` (
 create table transaction (
     id int primary key auto_increment,
     user_id bigint,
-    credit_card_number bigint,
+    credit_card_number varchar(255),
     credit_card_holder varchar(255),
     product_id bigint,
     paid bit

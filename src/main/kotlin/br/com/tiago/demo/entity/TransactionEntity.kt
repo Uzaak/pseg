@@ -1,5 +1,6 @@
 package br.com.tiago.demo.entity
 
+import br.com.tiago.demo.exception.encrypted
 import br.com.tiago.demo.model.CreditCard
 import br.com.tiago.demo.model.Product
 import br.com.tiago.demo.model.Transaction
@@ -17,7 +18,7 @@ data class TransactionEntity (
         @Column(name = "user_id")
         var userId: Long,
         @Column(name = "credit_card_number")
-        var creditCardNumber: Long,
+        var creditCardNumber: String,
         @Column(name = "credit_card_holder")
         var creditCardHolder: String,
         @Column(name = "product_id")
@@ -27,7 +28,7 @@ data class TransactionEntity (
         var paid: Boolean
 
 ) {
-    constructor() : this(null, 0, 0, "holder", 0, false)
-    constructor(user: User, card: CreditCard, product: Product) : this(null, user.id!!, card.number, card.holder, product.id!!, false)
-    constructor(transaction: Transaction) : this(transaction.id, transaction.user.id!!, transaction.creditCardNumber, transaction.creditCardHolder, transaction.product.id!!, transaction.paid)
+    constructor() : this(null, 0, "0".encrypted(), "holder", 0, false)
+    constructor(user: User, card: CreditCard, product: Product) : this(null, user.id!!, card.number.encrypted(), card.holder, product.id!!, false)
+    constructor(transaction: Transaction) : this(transaction.id, transaction.user.id!!, transaction.creditCardNumber.encrypted(), transaction.creditCardHolder, transaction.product.id!!, transaction.paid)
 }

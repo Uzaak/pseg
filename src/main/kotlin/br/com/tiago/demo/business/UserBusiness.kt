@@ -2,10 +2,7 @@ package br.com.tiago.demo.business
 
 import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.entity.UserEntity
-import br.com.tiago.demo.exception.CreditCardNotFoundException
-import br.com.tiago.demo.exception.ProductNotFoundException
-import br.com.tiago.demo.exception.TransactionNotFoundException
-import br.com.tiago.demo.exception.UserNotFoundException
+import br.com.tiago.demo.exception.*
 import br.com.tiago.demo.model.CreditCard
 import br.com.tiago.demo.model.Product
 import br.com.tiago.demo.model.Transaction

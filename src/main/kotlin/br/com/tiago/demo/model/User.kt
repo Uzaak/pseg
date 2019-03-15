@@ -4,6 +4,7 @@ import br.com.tiago.demo.entity.UserEntity
 import br.com.tiago.demo.exception.CreditCardNotFoundException
 import br.com.tiago.demo.exception.InvalidCreditCardException
 import br.com.tiago.demo.exception.InvalidUserException
+import br.com.tiago.demo.exception.decrypted
 import br.com.tiago.demo.repository.CreditCardRepository
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -23,7 +24,7 @@ data class User (
         }
     }
 
-    constructor(entity: UserEntity) : this(entity.id, entity.name, entity.cpf, entity.email, entity.password)
+    constructor(entity: UserEntity) : this(entity.id, entity.name, entity.cpf, entity.email, entity.password.decrypted())
 
     fun has(card: CreditCard): Boolean {
 

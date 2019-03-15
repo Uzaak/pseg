@@ -2,10 +2,7 @@ package br.com.tiago.demo.business
 
 import br.com.tiago.demo.entity.CreditCardEntity
 import br.com.tiago.demo.entity.TransactionEntity
-import br.com.tiago.demo.exception.CreditCardNotFoundException
-import br.com.tiago.demo.exception.TransactionNotFoundException
-import br.com.tiago.demo.exception.UserCardMismatchException
-import br.com.tiago.demo.exception.UserNotFoundException
+import br.com.tiago.demo.exception.*
 import br.com.tiago.demo.model.CreditCard
 import br.com.tiago.demo.model.Transaction
 import br.com.tiago.demo.model.User
@@ -60,7 +57,7 @@ class TransactionBusiness {
 
     fun makeTransaction(userId: Long, creditCard: CreditCard, productId: Long): Transaction {
 
-        val entity = TransactionEntity(null, userId, creditCard.number, creditCard.holder, productId, false)
+        val entity = TransactionEntity(null, userId, creditCard.number.encrypted(), creditCard.holder, productId, false)
 
         entity.paid = paymentValidator.charge(creditCard)
         if ( entity.paid ) {

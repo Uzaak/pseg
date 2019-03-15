@@ -1,5 +1,6 @@
 package br.com.tiago.demo.entity
 
+import br.com.tiago.demo.exception.encrypted
 import br.com.tiago.demo.model.User
 import javax.persistence.*
 
@@ -21,6 +22,6 @@ data class UserEntity (
         var password: String
 
 ) {
-    constructor() : this(null, "name", 0, "email", "password")
-    constructor(user: User) : this(user.id, user.name, user.cpf, user.email, user.password)
+    constructor() : this(null, "name", 0, "email", "password".encrypted())
+    constructor(user: User) : this(user.id, user.name, user.cpf, user.email, user.password.encrypted())
 }
