@@ -4,7 +4,7 @@ use pseg;
 
 create table `credit_card` (
     id int primary key auto_increment,
-    card_number bigint,
+    card_number varchar(255),
     holder_id bigint,
     holder varchar(255),
     cvv int,
