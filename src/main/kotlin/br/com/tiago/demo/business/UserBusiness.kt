@@ -15,19 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class UserBusiness {
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
-
-    @Autowired
-    private lateinit var creditCardRepository: CreditCardRepository
-
-    @Autowired
-    private lateinit var productRepository: ProductRepository
-
-    @Autowired
-    private lateinit var transactionRepository: TransactionRepository
+class UserBusiness (
+    @Autowired private var userRepository: UserRepository,
+    @Autowired private var creditCardRepository: CreditCardRepository,
+    @Autowired private var productRepository: ProductRepository,
+    @Autowired private var transactionRepository: TransactionRepository
+) {
 
     fun getUser(userId: Long): User {
         val entity = userRepository.findById(userId).orElseThrow { UserNotFoundException() }

@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
-class CreditCardController {
-
-    @Autowired
-    private lateinit var creditCardBusiness: CreditCardBusiness
+class CreditCardController (
+    @Autowired private var creditCardBusiness: CreditCardBusiness
+) {
 
     @RequestMapping(value = ["/cards/{cardId}"], method = [(RequestMethod.GET)])
     fun getCard(@PathVariable(value = "cardId") cardId: Long): ResponseEntity<CreditCard> {

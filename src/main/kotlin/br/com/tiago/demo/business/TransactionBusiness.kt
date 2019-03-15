@@ -1,6 +1,5 @@
 package br.com.tiago.demo.business
 
-import br.com.tiago.demo.entity.CreditCardEntity
 import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.exception.*
 import br.com.tiago.demo.extension.encrypted
@@ -15,19 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Component
-class TransactionBusiness {
-
-    @Autowired
-    private lateinit var transactionRepository: TransactionRepository
-
-    @Autowired
-    private lateinit var userRepository: UserRepository
-
-    @Autowired
-    private lateinit var creditCardRepository: CreditCardRepository
-
-    @Autowired
-    private lateinit var paymentValidator: PaymentValidator
+class TransactionBusiness (
+    @Autowired private var transactionRepository: TransactionRepository,
+    @Autowired private var userRepository: UserRepository,
+    @Autowired private var creditCardRepository: CreditCardRepository,
+    @Autowired private var paymentValidator: PaymentValidator
+) {
 
     fun getTransaction(transactionId: Long): Transaction {
         val entity = transactionRepository.findById(transactionId).orElseThrow { TransactionNotFoundException() }

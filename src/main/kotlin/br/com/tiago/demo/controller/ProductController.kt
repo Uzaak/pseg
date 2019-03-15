@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
-class ProductController {
-
-    @Autowired
-    private lateinit var productBusiness: ProductBusiness
+class ProductController (
+    @Autowired private var productBusiness: ProductBusiness
+) {
 
     @RequestMapping(value = ["/products/{productId}"], method = [(RequestMethod.GET)])
     fun getProduct(@PathVariable(value = "productId") productId: Long): ResponseEntity<Product> {

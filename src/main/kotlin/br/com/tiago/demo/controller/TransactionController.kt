@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
-class TransactionController {
-
-    @Autowired
-    private lateinit var transactionBusiness: TransactionBusiness
-
+class TransactionController (
+    @Autowired private var transactionBusiness: TransactionBusiness
+) {
     @RequestMapping(value = ["/transaction/{transactionId}"], method = [(RequestMethod.GET)])
     fun getTransaction(@PathVariable(value = "transactionId") transactionId: Long): ResponseEntity<Transaction> {
         val transaction = transactionBusiness.getTransaction(transactionId)

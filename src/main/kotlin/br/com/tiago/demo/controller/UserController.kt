@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)], produces = [(MediaType.APPLICATION_JSON_VALUE)])
-class UserController {
-
-    @Autowired
-    private lateinit var userBusiness: UserBusiness
-
+class UserController (
+    @Autowired private var userBusiness: UserBusiness
+) {
     @RequestMapping(value = ["/users/{userId}"], method = [(RequestMethod.GET)])
     fun getUser(@PathVariable(value = "userId") userId: Long): ResponseEntity<User> {
         val user = userBusiness.getUser(userId)
