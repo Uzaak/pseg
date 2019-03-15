@@ -1,6 +1,7 @@
 package br.com.tiago.demo.controller
 
 import br.com.tiago.demo.business.ProductBusiness
+import br.com.tiago.demo.exception.InvalidProductException
 import br.com.tiago.demo.model.Product
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -23,6 +24,15 @@ class ProductController (
     @RequestMapping(value = ["/products"], method = [(RequestMethod.POST)])
     fun createProduct(@RequestBody product: Product): ResponseEntity<Product> {
         val persistedProduct = productBusiness.createProduct(product)
+        return ResponseEntity(persistedProduct, HttpStatus.OK)
+    }
+
+    @RequestMapping(value = ["/products"], method = [(RequestMethod.PUT)])
+    fun editProduct(@RequestBody product: Product): ResponseEntity<Product> {
+        if ( product.id == null ) {
+            throw InvalidProductException()
+        }
+        val persistedProduct = productBusiness.editProduct(product)
         return ResponseEntity(persistedProduct, HttpStatus.OK)
     }
 

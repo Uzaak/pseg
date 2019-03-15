@@ -22,5 +22,11 @@ class ProductBusiness(
         return Product.fromEntity(persistedProduct)
     }
 
+    fun editProduct(product: Product): Product {
+        val entity = product.toEntity()
+        val persistedProduct = productRepository.save(entity)
+        return Product.fromEntity(persistedProduct)
+    }
+
 }
 
