@@ -15,13 +15,13 @@ class ProductBusiness {
 
     fun getProduct(productId: Long): Product {
         val entity = productRepository.findById(productId).orElseThrow { ProductNotFoundException() }
-        return Product(entity)
+        return Product.fromEntity(entity)
     }
 
     fun createProduct(product: Product): Product {
-        val entity = ProductEntity(product)
+        val entity = product.toEntity()
         val persistedProduct = productRepository.save(entity)
-        return Product(persistedProduct)
+        return Product.fromEntity(persistedProduct)
     }
 
 }

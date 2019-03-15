@@ -31,18 +31,18 @@ class UserBusiness {
 
     fun getUser(userId: Long): User {
         val entity = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
-        return User(entity)
+        return User.fromEntity(entity)
     }
 
     fun createUser(user: User): User {
-        val entity = UserEntity(user)
+        val entity = user.toEntity()
         val persistedUser = userRepository.save(entity)
-        return User(persistedUser)
+        return User.fromEntity(persistedUser)
     }
 
     fun getUserCards(userId: Long): List<CreditCard> {
         val entityList = creditCardRepository.findAllByHolderId(userId).orElseThrow { CreditCardNotFoundException() }
-        return entityList.map { CreditCard(it) }
+        return entityList.map { CreditCard.fromEntity(it) }
     }
 
     fun getUserTransactions(userId: Long): List<Transaction> {
@@ -51,15 +51,20 @@ class UserBusiness {
     }
 
     private fun transactionFrom(entity: TransactionEntity): Transaction {
-        var transaction = Transaction(entity)
+        var transaction = Transaction.fromEntity(entity)
 
         val userEntity = userRepository.findById(entity.userId).orElseThrow { UserNotFoundException() }
-        transaction.user = User(userEntity)
+        transaction.user = User.fromEntity(userEntity)
 
         val productEntity = productRepository.findById(entity.productId).orElseThrow { ProductNotFoundException() }
-        transaction.product = Product(productEntity)
+        transaction.product = Product.fromEntity(productEntity)
 
         return transaction
+    }
+
+    fun getUserTransactions(userId: Long, paid: Boolean): List<Transaction> {
+        val entityList = transactionRepository.findAllByUserIdAndPaid(userId, paid).orElseThrow { TransactionNotFoundException() }
+        return entityList.map { transactionFrom(it) }
     }
 
 }

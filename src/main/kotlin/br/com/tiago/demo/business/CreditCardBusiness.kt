@@ -17,14 +17,14 @@ class CreditCardBusiness {
 
     fun getCard(cardId: Long): CreditCard {
         val entity = creditCardRepository.findById(cardId).orElseThrow { CreditCardNotFoundException() }
-        return CreditCard(entity)
+        return CreditCard.fromEntity(entity)
     }
 
     fun createCard(card: CreditCard): CreditCard {
         //card.isValid()
-        val entity = CreditCardEntity(card)
+        val entity = card.toEntity()
         val persistedCard = creditCardRepository.save(entity)
-        return CreditCard(persistedCard)
+        return CreditCard.fromEntity(persistedCard)
     }
 
 }

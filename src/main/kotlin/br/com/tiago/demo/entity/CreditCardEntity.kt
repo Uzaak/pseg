@@ -1,6 +1,6 @@
 package br.com.tiago.demo.entity
 
-import br.com.tiago.demo.exception.encrypted
+import br.com.tiago.demo.extension.encrypted
 import br.com.tiago.demo.model.CreditCard
 import java.util.*
 import javax.persistence.*
@@ -26,5 +26,4 @@ data class CreditCardEntity (
 
 ) {
     constructor() : this(null, "0".encrypted(), null, "holder", null, null)
-    constructor(card: CreditCard) : this(card.id, card.number.encrypted(), card.holderId, card.holder, card.cvv, card.expiration)
 }

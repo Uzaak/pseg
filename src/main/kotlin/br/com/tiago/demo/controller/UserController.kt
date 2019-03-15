@@ -36,8 +36,13 @@ class UserController {
     }
 
     @RequestMapping(value = ["/users/{userId}/transactions"], method = [(RequestMethod.GET)])
-    fun getUserTransactions(@PathVariable(value = "userId") userId: Long): ResponseEntity<List<Transaction>> {
-        val products = userBusiness.getUserTransactions(userId)
+    fun getUserTransactions(@PathVariable(value = "userId") userId: Long, @RequestParam(value = "paid") paid: Boolean?): ResponseEntity<List<Transaction>> {
+        var products: List<Transaction>
+        if ( paid == null ) {
+            products = userBusiness.getUserTransactions(userId)
+        } else {
+            products = userBusiness.getUserTransactions(userId, paid)
+        }
         return ResponseEntity(products, HttpStatus.OK)
     }
 

@@ -1,7 +1,8 @@
 package br.com.tiago.demo.model
 
 import br.com.tiago.demo.entity.CreditCardEntity
-import br.com.tiago.demo.exception.decrypted
+import br.com.tiago.demo.extension.decryptedLong
+import br.com.tiago.demo.extension.encrypted
 import java.util.Date
 
 data class CreditCard (
@@ -15,6 +16,14 @@ data class CreditCard (
         var expiration: Date?
 
 ) {
-    constructor(entity: CreditCardEntity) : this(entity.id, entity.number.decrypted().toLong(), entity.holderId, entity.holder, entity.cvv, entity.expiration)
+    companion object {
+        fun fromEntity(entity: CreditCardEntity): CreditCard {
+            return CreditCard(entity.id, entity.number.decryptedLong(), entity.holderId, entity.holder, entity.cvv, entity.expiration)
+        }
+    }
+
+    fun toEntity(): CreditCardEntity {
+        return CreditCardEntity(id, number.encrypted(), holderId, holder, cvv, expiration)
+    }
 }
 

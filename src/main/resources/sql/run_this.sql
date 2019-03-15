@@ -31,5 +31,5 @@ create table transaction (
     credit_card_number varchar(255),
     credit_card_holder varchar(255),
     product_id bigint,
-    paid bit
+    paid bit(1)
 );

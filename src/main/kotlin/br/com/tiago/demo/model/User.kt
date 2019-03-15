@@ -1,12 +1,10 @@
 package br.com.tiago.demo.model
 
 import br.com.tiago.demo.entity.UserEntity
-import br.com.tiago.demo.exception.CreditCardNotFoundException
 import br.com.tiago.demo.exception.InvalidCreditCardException
 import br.com.tiago.demo.exception.InvalidUserException
-import br.com.tiago.demo.exception.decrypted
-import br.com.tiago.demo.repository.CreditCardRepository
-import org.springframework.beans.factory.annotation.Autowired
+import br.com.tiago.demo.extension.decrypted
+import br.com.tiago.demo.extension.encrypted
 
 data class User (
 
@@ -22,9 +20,15 @@ data class User (
         fun placeholder(): User {
             return User(null, "name", 0, "email", "password")
         }
+
+        fun fromEntity(entity: UserEntity): User {
+            return User(entity.id, entity.name, entity.cpf, entity.email, entity.password.decrypted())
+        }
     }
 
-    constructor(entity: UserEntity) : this(entity.id, entity.name, entity.cpf, entity.email, entity.password.decrypted())
+    fun toEntity(): UserEntity {
+        return UserEntity(id, name, cpf, email, password.encrypted())
+    }
 
     fun has(card: CreditCard): Boolean {
 

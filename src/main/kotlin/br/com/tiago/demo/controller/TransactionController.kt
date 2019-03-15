@@ -32,7 +32,9 @@ class TransactionController {
 
         if ( data.userId == null ) {
             throw InvalidUserException()
-        } else if ( data.productId == null ) {
+        }
+
+        if ( data.productId == null ) {
             throw InvalidProductException()
         }
 

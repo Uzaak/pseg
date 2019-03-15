@@ -6,4 +6,5 @@ import java.util.*
 
 interface TransactionRepository: CrudRepository<TransactionEntity, Long> {
     fun findAllByUserId(userId: Long): Optional<List<TransactionEntity>>
+    fun findAllByUserIdAndPaid(userId: Long, paid: Boolean): Optional<List<TransactionEntity>>
 }

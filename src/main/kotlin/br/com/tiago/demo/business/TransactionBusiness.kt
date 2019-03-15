@@ -3,6 +3,7 @@ package br.com.tiago.demo.business
 import br.com.tiago.demo.entity.CreditCardEntity
 import br.com.tiago.demo.entity.TransactionEntity
 import br.com.tiago.demo.exception.*
+import br.com.tiago.demo.extension.encrypted
 import br.com.tiago.demo.model.CreditCard
 import br.com.tiago.demo.model.Transaction
 import br.com.tiago.demo.model.User
@@ -30,17 +31,17 @@ class TransactionBusiness {
 
     fun getTransaction(transactionId: Long): Transaction {
         val entity = transactionRepository.findById(transactionId).orElseThrow { TransactionNotFoundException() }
-        return Transaction(entity)
+        return Transaction.fromEntity(entity)
     }
 
     //TODO: Documentação
     fun makeTransaction(userId: Long, cardId: Long, productId: Long): Transaction {
 
         val userEntity = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
-        val user = User(userEntity)
+        val user = User.fromEntity(userEntity)
 
         val cardEntity = creditCardRepository.findById(cardId).orElseThrow { CreditCardNotFoundException() }
-        val card = CreditCard(cardEntity)
+        val card = CreditCard.fromEntity(cardEntity)
 
         if ( ! user.has(card) ) {
             throw UserCardMismatchException()
@@ -51,7 +52,7 @@ class TransactionBusiness {
         entity.paid = paymentValidator.charge(card)
 
         val persistedTransaction = transactionRepository.save(entity)
-        return Transaction(persistedTransaction)
+        return Transaction.fromEntity(persistedTransaction)
 
     }
 
@@ -61,12 +62,13 @@ class TransactionBusiness {
 
         entity.paid = paymentValidator.charge(creditCard)
         if ( entity.paid ) {
-            val creditCardEntity = CreditCardEntity(creditCard)
+            creditCard.holderId = userId
+            val creditCardEntity = creditCard.toEntity()
             creditCardRepository.save(creditCardEntity)
         }
 
         val persistedTransaction = transactionRepository.save(entity)
-        return Transaction(persistedTransaction)
+        return Transaction.fromEntity(persistedTransaction)
     }
 
 }
