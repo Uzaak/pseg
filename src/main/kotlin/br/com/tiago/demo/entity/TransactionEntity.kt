@@ -27,6 +27,7 @@ data class TransactionEntity (
         var paid: Boolean
 
 ) {
+    companion object;
     constructor() : this(null, 0, "0".encrypted(), "holder", 0, false)
     constructor(user: User, card: CreditCard, product: Product) : this(null, user.id!!, card.number.encrypted(), card.holder, product.id!!, false)
 }

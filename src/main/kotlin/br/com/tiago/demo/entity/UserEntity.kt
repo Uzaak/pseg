@@ -21,5 +21,6 @@ data class UserEntity (
         var password: String
 
 ) {
+    companion object;
     constructor() : this(null, "name", 0, "email", "password".encrypted())
 }

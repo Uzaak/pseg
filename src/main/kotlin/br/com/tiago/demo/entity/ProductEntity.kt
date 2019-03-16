@@ -16,6 +16,7 @@ data class ProductEntity (
         var price: Double
 
 ) {
+    companion object;
     constructor() : this(null, "description", 0.0)
 }
 

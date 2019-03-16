@@ -24,5 +24,6 @@ data class CreditCardEntity (
         var expiration: Date?
 
 ) {
+    companion object;
     constructor() : this(null, "0".encrypted(), null, "holder", null, null)
 }
