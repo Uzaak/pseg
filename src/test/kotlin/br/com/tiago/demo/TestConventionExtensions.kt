@@ -19,6 +19,7 @@ import java.util.*
 
 // CREDIT CARD
 fun CreditCard.Companion.testCard() = CreditCard(1, 1234567890123456, 1, "John Appleseed", 123, Date(0))
+fun CreditCard.Companion.withNullId() = CreditCard(null, 1234, 1, "John Appleseed", 123, Date(0))
 fun CreditCard.Companion.evenCard() = CreditCard(2, 24680, 1, "John Appleseed", 456, Date())
 fun CreditCard.Companion.oddCard() = CreditCard(3, 13579, 1, "John Appleseed", 789, Date())
 
@@ -26,6 +27,7 @@ fun CreditCardEntity.Companion.testEntity() = CreditCardEntity(1, "231d1c3cde54b
 
 // PRODUCT
 fun Product.Companion.testProduct() = Product(1, "Test Product Description Yada Yada", 1234567.89)
+fun Product.Companion.withNullId() = Product(null, "Test Product With Null Id", 9876543.21)
 
 fun ProductEntity.Companion.testEntity() = ProductEntity(1, "Test Product Description Yada Yada", 1234567.89)
 
