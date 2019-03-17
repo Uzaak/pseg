@@ -1,7 +1,5 @@
 package br.com.tiago.demo.exception
 
-import org.springframework.security.crypto.encrypt.Encryptors
-
 class CreditCardNotFoundException: Exception()
 class ProductNotFoundException: Exception()
 class UserNotFoundException: Exception()
