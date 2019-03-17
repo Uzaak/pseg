@@ -33,6 +33,12 @@ class UserBusiness (
         return User.fromEntity(persistedUser)
     }
 
+    fun editUser(user: User): User {
+        val entity = user.toEntity()
+        val persistedUser = userRepository.save(entity)
+        return User.fromEntity(persistedUser)
+    }
+
     fun getUserCards(userId: Long): List<CreditCard> {
         val entityList = creditCardRepository.findAllByHolderId(userId).orElseThrow { CreditCardNotFoundException() }
         return entityList.map { CreditCard.fromEntity(it) }

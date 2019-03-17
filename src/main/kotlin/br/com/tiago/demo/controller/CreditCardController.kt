@@ -1,7 +1,10 @@
 package br.com.tiago.demo.controller
 
 import br.com.tiago.demo.business.CreditCardBusiness
+import br.com.tiago.demo.exception.InvalidCreditCardException
+import br.com.tiago.demo.exception.InvalidProductException
 import br.com.tiago.demo.model.CreditCard
+import br.com.tiago.demo.model.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -24,6 +27,15 @@ class CreditCardController (
     fun createCard(@RequestBody card: CreditCard): ResponseEntity<CreditCard> {
         val persistedCard = creditCardBusiness.createCard(card)
         return ResponseEntity(persistedCard, HttpStatus.CREATED)
+    }
+
+    @RequestMapping(value = ["/cards"], method = [(RequestMethod.PUT)])
+    fun editCard(@RequestBody card: CreditCard): ResponseEntity<CreditCard> {
+        if ( card.id == null ) {
+            throw InvalidCreditCardException()
+        }
+        val persistedCard = creditCardBusiness.editCard(card)
+        return ResponseEntity(persistedCard, HttpStatus.OK)
     }
 
 }

@@ -16,7 +16,12 @@ class CreditCardBusiness(
     }
 
     fun createCard(card: CreditCard): CreditCard {
-        //card.isValid()
+        val entity = card.toEntity()
+        val persistedCard = creditCardRepository.save(entity)
+        return CreditCard.fromEntity(persistedCard)
+    }
+
+    fun editCard(card: CreditCard): CreditCard {
         val entity = card.toEntity()
         val persistedCard = creditCardRepository.save(entity)
         return CreditCard.fromEntity(persistedCard)

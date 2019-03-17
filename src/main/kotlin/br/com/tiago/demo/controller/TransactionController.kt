@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*
 class TransactionController (
     @Autowired private var transactionBusiness: TransactionBusiness
 ) {
-    @RequestMapping(value = ["/transaction/{transactionId}"], method = [(RequestMethod.GET)])
+    @RequestMapping(value = ["/transactions/{transactionId}"], method = [(RequestMethod.GET)])
     fun getTransaction(@PathVariable(value = "transactionId") transactionId: Long): ResponseEntity<Transaction> {
         val transaction = transactionBusiness.getTransaction(transactionId)
         return ResponseEntity(transaction, HttpStatus.OK)
     }
 
-    @RequestMapping(value = ["/transaction"], method = [(RequestMethod.POST)])
+    @RequestMapping(value = ["/transactions"], method = [(RequestMethod.POST)])
     fun makeTransaction(@RequestBody data: TransactionBody): ResponseEntity<Transaction?> {
 
         var transaction: Transaction
