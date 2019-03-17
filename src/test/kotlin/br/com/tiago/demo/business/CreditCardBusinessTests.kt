@@ -68,4 +68,18 @@ class CreditCardBusinessTests {
         // THEN
         assertThat(createdCard, equalTo(card))
     }
+
+    @Test
+    fun shouldEditCard() {
+        // GIVEN
+        val card = CreditCard.testCard()
+        val entity = card.toEntity()
+        whenever(creditCardRepository.save<CreditCardEntity>(any())).thenReturn(entity)
+
+        // WHEN
+        val editedCard = creditCardBusiness.editCard(card)
+
+        // THEN
+        assertThat(editedCard, equalTo(card))
+    }
 }

@@ -84,6 +84,20 @@ class UserBusinessTests {
     }
 
     @Test
+    fun shouldEditUser() {
+        // GIVEN
+        val user = User.testUser()
+        val entity = user.toEntity()
+        whenever(userRepository.save<UserEntity>(any())).thenReturn(entity)
+
+        // WHEN
+        val editedUser = userBusiness.editUser(user)
+
+        // THEN
+        assertThat(editedUser, equalTo(user))
+    }
+
+    @Test
     fun shouldCorrectlyReturnUserCreditCards() {
         // GIVEN
         val card = CreditCard.testCard()
