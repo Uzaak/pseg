@@ -43,6 +43,11 @@ class UserBusiness (
         return entityList.map { transactionFrom(it) }
     }
 
+    fun getUserTransactions(userId: Long, paid: Boolean): List<Transaction> {
+        val entityList = transactionRepository.findAllByUserIdAndPaid(userId, paid).orElseThrow { TransactionNotFoundException() }
+        return entityList.map { transactionFrom(it) }
+    }
+
     private fun transactionFrom(entity: TransactionEntity): Transaction {
         var transaction = Transaction.fromEntity(entity)
 
@@ -53,11 +58,6 @@ class UserBusiness (
         transaction.product = Product.fromEntity(productEntity)
 
         return transaction
-    }
-
-    fun getUserTransactions(userId: Long, paid: Boolean): List<Transaction> {
-        val entityList = transactionRepository.findAllByUserIdAndPaid(userId, paid).orElseThrow { TransactionNotFoundException() }
-        return entityList.map { transactionFrom(it) }
     }
 
 }

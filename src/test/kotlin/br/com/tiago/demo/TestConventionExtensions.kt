@@ -33,6 +33,7 @@ fun ProductEntity.Companion.testEntity() = ProductEntity(1, "Test Product Descri
 
 // USER
 fun User.Companion.testUser() = User(1, "John Appleseed", 12345678900, "some@e.mail", "superstrong_P@ssW0rD")
+fun User.Companion.withNullId() = User(null, "John Appleseed", 123, "some@e.mail", "superstrong_P@ssW0rD")
 
 fun UserEntity.Companion.testEntity() = UserEntity(1, "John Appleseed", 12345678900, "some@e.mail", "25670ebd6f7bb0129af0c1df65fa3ab9ef46b015c63eb4fd31264a7808c483f406ff292e569f32d1bb2919f50422e934")
 

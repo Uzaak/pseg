@@ -26,7 +26,6 @@ class TransactionBusiness (
         return Transaction.fromEntity(entity)
     }
 
-    //TODO: Documentação
     fun makeTransaction(userId: Long, cardId: Long, productId: Long): Transaction {
 
         val userEntity = userRepository.findById(userId).orElseThrow { UserNotFoundException() }
