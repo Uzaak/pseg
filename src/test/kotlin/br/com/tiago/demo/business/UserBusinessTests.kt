@@ -145,7 +145,6 @@ class UserBusinessTests {
     fun shouldThrowExceptionWhenCannotFindUserOfOneTransaction() {
         // GIVEN
         val transactionEntity = TransactionEntity.testEntity()
-        val productEntity = ProductEntity.testEntity()
         whenever(transactionRepository.findAllByUserId(any())).thenReturn(Optional.of(listOf(transactionEntity, transactionEntity, transactionEntity)))
         whenever(userRepository.findById(any())).thenReturn(Optional.empty())
 
