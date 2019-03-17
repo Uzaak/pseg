@@ -24,7 +24,7 @@ class UserControllerTests {
     fun init() {
         MockitoAnnotations.initMocks(this)
         userController = UserController(userBusiness)
-        mockMvc = MockMvcBuilders.standaloneSetup(userBusiness)
+        mockMvc = MockMvcBuilders.standaloneSetup(userController)
                 .setControllerAdvice(ExceptionHandler())
                 .build()
     }
