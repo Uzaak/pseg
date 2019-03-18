@@ -14,7 +14,7 @@ Para rodar o arquivo, conectar ao MySQL local e executar:
 mysql> source {path_to_project}/src/main/resources/sql/run_this.sql
 ```
 
-### Unix Terminal
+## Quick Start
 
 O script em /src/main/resources/sh/curl.sh foi criado para testar rapidamente via terminal todas as requisições feitas pelo sistema.
 
@@ -22,7 +22,7 @@ O script em /src/main/resources/sh/curl.sh foi criado para testar rapidamente vi
 $ {path_to_project}/src/main/resources/sh/curl.sh
 ```
 
-## Casos de uso
+## Casos de uso pedidos na prova
 
 ### 1 - Cadastrar um produto
 
@@ -53,6 +53,7 @@ curl -X POST \
 	"password": "Link Start"
 }'
 ```
+*Obs: A senha é salva criptografada, mas é retornada em plain-text para facilitar a visualização durante a avaliação
 
 ### 3 - Fazer uma compra usando um cartão de crédito com um produto cadastrado.
 
@@ -69,6 +70,7 @@ curl -X POST \
 	"productId": 1
 }'
 ```
+*Obs: O cartão é salvo criptografado, mas é retornado em plain-text para facilitar a visualização durante a avaliação
 
 Compra utilizando cartão não salvo (soma dos dígitos par, portanto transação é bem sucedida e cartão é salvo ao final):
 ```
@@ -86,6 +88,7 @@ curl -X POST \
 	"productId": 1
 }'
 ```
+*Obs: O cartão é salvo criptografado, mas é retornado em plain-text para facilitar a visualização durante a avaliação
 
 Compra utilizando cartão não salvo (soma dos dígitos ímpar, portanto transação não é bem sucedida e cartão não é salvo):
 ```
@@ -103,6 +106,7 @@ curl -X POST \
 	"productId": 1
 }'
 ```
+*Obs: O cartão é salvo criptografado, mas é retornado em plain-text para facilitar a visualização durante a avaliação
 
 ### 4 - Consultar produtos de um cliente (pagos e não pagos)
 
